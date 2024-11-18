@@ -18,20 +18,16 @@ public class Rack_Test extends LinearOpMode {
     public DcMotor FL_Motor = null;
     public DcMotor FR_Motor = null;
 
-    public Servo Rack_Servo = null;
-
-    public double Rack_Pos = 0.0;
-    public double Rack_inc = 0.05;
-    public boolean dpad_latch_right = false;
-    public boolean dpad_latch_left = false;
-
-
+	public DcMotor Rack_Motor = null;
+	
     @Override
     public void runOpMode() {
         BR_Motor = hardwareMap.get(DcMotor.class, "BR Wheel Motor");
         FL_Motor = hardwareMap.get(DcMotor.class, "FL Wheel Motor");
         BL_Motor = hardwareMap.get(DcMotor.class, "BL Wheel Motor");
         FR_Motor = hardwareMap.get(DcMotor.class, "FR Wheel Motor");
+
+		Rack_Motor = hardwareMap.get(DcMotor.class, "Rack Motor");
 
 		//Drive Test
         //FL_Motor.setDirection(DcMotor.Direction.REVERSE);
@@ -78,25 +74,14 @@ public class Rack_Test extends LinearOpMode {
             BL_Motor.setPower(leftBackPower);
             BR_Motor.setPower(rightBackPower);
 
-	// Calculate Servo Position
-            if(!dpad_latch_right && gamepad1.dpad_right && Rack_Pos < 1.0){
-                Rack_Pos = Rack_Pos + Rack_inc;
-            }
-            dpad_latch_right = gamepad1.dpad_right;
+			Rack_Motor.setPower(gamepad1.left_trigger - gamepad1.right_trigger);
+				
 
-            if(!dpad_latch_left && gamepad1.dpad_left && Rack_Pos > 0.0){
-                Rack_Pos = Rack_Pos - Rack_inc;
-            }
-            dpad_latch_left = gamepad1.dpad_left;
-
-            // Set Servo Position
-            Rack_Servo.setPosition(Rack_Pos);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
-            telemetry.addData("Rack_Pos", "%4.2f", Rack_Pos);
             telemetry.update();
         }
     }}
