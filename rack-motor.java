@@ -83,5 +83,21 @@ public class Rack_Test extends LinearOpMode {
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
             telemetry.update();
+
+		  // Reset the motor encoder so that it reads zero ticks
+      motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+      // Turn the motor back on, required if you use STOP_AND_RESET_ENCODER
+      motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+      waitForStart();
+		        // Get the current position of the motor
+            int position = motor.getCurrentPosition();
+            double revolutions = position/CPR;
+
+            double angle = revolutions * 360;
+            double angleNormalized = angle % 360;
+
+            double distance = circumference * revolutions;
         }
     }}
