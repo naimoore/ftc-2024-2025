@@ -79,8 +79,8 @@ public class Rack_Test extends LinearOpMode {
             FR_Motor.setPower(rightFrontPower);
             BL_Motor.setPower(leftBackPower);
             BR_Motor.setPower(rightBackPower);
-//test
-            // Calculate Servo Position
+
+	// Calculate Servo Position
             if(!dpad_latch_right && gamepad1.dpad_right && Rack_Pos < 1.0){
                 Rack_Pos = Rack_Pos + Rack_inc;
             }
