@@ -33,8 +33,6 @@ public class Rack_Test extends LinearOpMode {
         BL_Motor = hardwareMap.get(DcMotor.class, "BL Wheel Motor");
         FR_Motor = hardwareMap.get(DcMotor.class, "FR Wheel Motor");
 
-        Rack_Servo = hardwareMap.get(Servo.class, "Rack_Servo");
-
 		//Drive Test
         //FL_Motor.setDirection(DcMotor.Direction.REVERSE);
         //BL_Motor.setDirection(DcMotor.Direction.REVERSE);
